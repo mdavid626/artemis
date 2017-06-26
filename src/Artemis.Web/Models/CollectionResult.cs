@@ -6,8 +6,8 @@ using System.Web;
 
 namespace Artemis.Web.Models
 {
-    public class CarAdvertContainer
+    public class CollectionResult<T> where T : class
     {
-        public IEnumerable<CarAdvertViewModel> CarAdverts { get; set; }
+        public IEnumerable<T> Entities { get; set; }
     }
 }

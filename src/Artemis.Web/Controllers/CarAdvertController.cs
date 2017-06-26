@@ -24,9 +24,9 @@ namespace Artemis.Web.Controllers
             if (ModelState.IsValid)
             {
                 var carAdverts = repository.Get();
-                var container = new CarAdvertContainer()
+                var container = new CollectionResult<CarAdvertViewModel>()
                 {
-                    CarAdverts = carAdverts.Select(c => c.MapToVm())
+                    Entities = carAdverts.Select(c => c.MapToVm())
                 };
                 return Ok(container);
             }

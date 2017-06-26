@@ -20,7 +20,7 @@ namespace Artemis.Web.Tests
 
             var result = controller.Get();
 
-            Assert.IsTrue(result is OkNegotiatedContentResult<CarAdvertContainer>);
+            Assert.IsTrue(result is OkNegotiatedContentResult<CollectionResult<CarAdvertViewModel>>);
         }
 
         [TestMethod]
