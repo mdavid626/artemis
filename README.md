@@ -9,9 +9,11 @@ Developer tools:
 - NuGet package manager
 - ASP.NET Web API 2
 - MSTest, NSubstitute, Effort
-- SQLite database
+- SQLite database, Entity Framework
 
 Please edit the `connectionstring` in the `web.config`. You can use the sample database provided (`artemis.db`). Please make sure the web application has read/write access to the database file. For development purposes you can place the database file in your user folder. You can use the `create.sql` script from the `Artemis.Data` project to create the initial database structure.
+
+The API is available on the URL: `http://<server>/api/CarAdvert`.
 
 ## Requirements
 
