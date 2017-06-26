@@ -7,23 +7,11 @@ using System.Threading.Tasks;
 
 namespace Atermis.Data
 {
-    public class CarAdvertDbContextProvider : ICarAdvertDbContextProvider, IDisposable
+    public class CarAdvertDbContextProvider : ICarAdvertDbContextProvider
     {
-        private CarAdvertDbContext dbContext;
-
-        public CarAdvertDbContextProvider()
-        {
-            dbContext = new CarAdvertDbContext();
-        }
-
-        public void Dispose()
-        {
-            dbContext.Dispose();
-        }
-
         public CarAdvertDbContext Provide()
         {
-            return dbContext;
+            return new CarAdvertDbContext();
         }
     }
 }

@@ -34,6 +34,8 @@ namespace Artemis.Web.Controllers
             if (ModelState.IsValid)
             {
                 var carAdvert = repository.Get(id);
+                if (carAdvert == null)
+                    return NotFound();
                 return Ok(carAdvert);
             }
             return BadRequest();

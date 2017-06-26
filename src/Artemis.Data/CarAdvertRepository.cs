@@ -7,28 +7,28 @@ using System.Threading.Tasks;
 
 namespace Artemis.Data
 {
-    public class CarAdvertRepository : ICarAdvertRepository
+    public class CarAdvertRepository : ICarAdvertRepository, IDisposable
     {
-        private ICarAdvertDbContextProvider dbContextProvider;
+        private CarAdvertDbContext dbContext;
 
         public CarAdvertRepository(ICarAdvertDbContextProvider dbContextProvider)
         {
-            this.dbContextProvider = dbContextProvider;
+            this.dbContext = dbContextProvider.Provide(); ;
         }
 
         public CarAdvert Get(int id)
         {
-            return null;
+            return dbContext.CarAdverts.FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<CarAdvert> Get()
         {
-            return new CarAdvert[0];
+            return dbContext.CarAdverts;
         }
 
         public void Update(CarAdvert carAdvert)
         {
-
+            
         }
 
         public void Create(CarAdvert carAdvert)
@@ -39,6 +39,11 @@ namespace Artemis.Data
         public void Delete(CarAdvert carAdvert)
         {
 
+        }
+
+        public void Dispose()
+        {
+            dbContext.Dispose();
         }
     }
 }

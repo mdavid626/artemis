@@ -13,7 +13,7 @@ namespace Artemis.Data
     {
         public CarAdvertDbContext() : base("SqlConnectionString")
         {
-
+            Database.SetInitializer<CarAdvertDbContext>(null);
         }
 
         public CarAdvertDbContext(DbConnection connection, bool contextOwnsConnection) 
