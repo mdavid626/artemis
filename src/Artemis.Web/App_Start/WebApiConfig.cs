@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -11,7 +12,15 @@ namespace Artemis.Web
     {
         public static void Register(HttpConfiguration config)
         {
+            config.AddUnity();
+
             config.MapHttpAttributeRoutes();
+        }
+
+        private static void AddUnity(this HttpConfiguration config)
+        {
+            var container = new UnityContainer();
+            config.DependencyResolver = new UnityResolver(container);
         }
     }
 }
