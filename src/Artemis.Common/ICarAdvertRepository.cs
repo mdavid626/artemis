@@ -11,7 +11,7 @@ namespace Artemis.Common
     {
         CarAdvert Get(int id);
 
-        IEnumerable<CarAdvert> Get(string orderBy = null);
+        IEnumerable<CarAdvert> Get(string orderBy = null, string direction = null);
 
         void Update(CarAdvert carAdvert);
 

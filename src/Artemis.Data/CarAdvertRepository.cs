@@ -23,9 +23,9 @@ namespace Artemis.Data
             return dbContext.CarAdverts.FirstOrDefault(c => c.Id == id);
         }
 
-        public IEnumerable<CarAdvert> Get(string orderBy = null)
+        public IEnumerable<CarAdvert> Get(string orderBy = null, string direction = null)
         {
-            var ordering = GetOrdering(orderBy);
+            var ordering = GetOrdering(orderBy, direction);
             return dbContext.CarAdverts.OrderBy(ordering);
         }
 
@@ -51,8 +51,16 @@ namespace Artemis.Data
             dbContext.Dispose();
         }
 
-        private string GetOrdering(string orderBy)
+        private string GetOrdering(string orderBy, string direction)
         {
+            var ascending = true;
+            if (direction?.ToLower() == "desc")
+                ascending = false;
+
+            var directionText = ascending
+                ? " asc"
+                : " desc";
+
             var allowedProps = typeof(CarAdvert)
                 .GetProperties()
                 .Where(p => p.GetCustomAttribute<SortableAttribute>() != null)
@@ -61,7 +69,7 @@ namespace Artemis.Data
             var prop = allowedProps.Intersect(new string[] { orderBy.ToLower() });
             if (prop.Any())
             {
-                return orderBy;
+                return orderBy + directionText;
             }
 
             return nameof(CarAdvert.Id);
