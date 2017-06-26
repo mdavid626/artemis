@@ -1,7 +1,7 @@
 # Artemis
 
 ## Solution
-As my time was very limited (4 hours) I was not able to implement all features. For example sorting and full unit tests coverage is missing.
+As my time was very limited (4 hours) I was not able to implement all features. For example full unit tests coverage is missing.
 
 Developer tools:
 - Visual Studio 2017
@@ -14,6 +14,8 @@ Developer tools:
 Please edit the `connectionstring` in the `web.config`. You can use the sample database provided (`artemis.db`). Please make sure the web application has read/write access to the database file. For development purposes you can place the database file in your user folder. You can use the `create.sql` script from the `Artemis.Data` project to create the initial database structure.
 
 The API is available on the URL: `http://<server>/api/CarAdvert`.
+
+Sorting: use the `orderBy` and `direction` query parameters, e.g.: `orderBy=Title&direction=desc`. The supported values for `orderBy` are: `Id`, `Title`, `Price` and for the `direction`: `asc` or `desc.
 
 ## Requirements
 
