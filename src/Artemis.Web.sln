@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Web", "Artemis.Web\Artemis.Web.csproj", "{FA406F25-A507-457B-AD0D-BB72AC9EDAED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Common", "..\Artemis.Common\Artemis.Common.csproj", "{61AA9996-0D1A-498B-95CC-2FDF9E52FD0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Common", "Artemis.Common\Artemis.Common.csproj", "{61AA9996-0D1A-498B-95CC-2FDF9E52FD0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Data", "Artemis.Data\Artemis.Data.csproj", "{326F065A-B8B0-4891-9CE9-0333F71BC2F4}"
 EndProject

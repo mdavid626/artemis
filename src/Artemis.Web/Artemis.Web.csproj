@@ -126,7 +126,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Artemis.Common\Artemis.Common.csproj">
+    <ProjectReference Include="..\Artemis.Common\Artemis.Common.csproj">
       <Project>{61aa9996-0d1a-498b-95cc-2fdf9e52fd0d}</Project>
       <Name>Artemis.Common</Name>
     </ProjectReference>
