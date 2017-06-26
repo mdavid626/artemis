@@ -1,4 +1,5 @@
-﻿using Artemis.Web.Models;
+﻿using Artemis.Common;
+using Artemis.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,11 @@ namespace Artemis.Web.Controllers
     [EnableCors(origins: "*", headers: "*",  methods: "*")]
     public class CarAdvertController : ApiController
     {
-        public CarAdvertController()
+        private ICarAdvertRepository repository;
+
+        public CarAdvertController(ICarAdvertRepository repository)
         {
-            
+            this.repository = repository;
         }
 
         public IHttpActionResult Get()
