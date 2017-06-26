@@ -15,7 +15,7 @@ Please edit the `connectionstring` in the `web.config`. You can use the sample d
 
 The API is available on the URL: `http://<server>/api/CarAdvert`.
 
-Sorting: use the `orderBy` and `direction` query parameters, e.g.: `orderBy=Title&direction=desc`. The supported values for `orderBy` are: `Id`, `Title`, `Price` and for the `direction`: `asc` or `desc.
+Sorting: use the `orderBy` and `direction` query parameters, e.g.: `orderBy=Title&direction=desc`. The supported values for `orderBy` are: `Id`, `Title`, `Price` and for the `direction`: `asc` or `desc`.
 
 ## Requirements
 
