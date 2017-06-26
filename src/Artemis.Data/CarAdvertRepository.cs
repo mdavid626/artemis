@@ -66,7 +66,7 @@ namespace Artemis.Data
                 .Where(p => p.GetCustomAttribute<SortableAttribute>() != null)
                 .Select(p => p.Name.ToLower());
 
-            var prop = allowedProps.Intersect(new string[] { orderBy.ToLower() });
+            var prop = allowedProps.Intersect(new string[] { orderBy?.ToLower() });
             if (prop.Any())
             {
                 return orderBy + directionText;

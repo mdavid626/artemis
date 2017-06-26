@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Artemis.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Web;
 
 namespace Artemis.Web.Models
 {
-    public class CarAdvertViewModel
+    public class CarAdvertViewModel : IValidatableObject
     {
         public int Id { get; set; }
 
@@ -25,5 +26,19 @@ namespace Artemis.Web.Models
         public int? Mileage { get; set; }
 
         public DateTime? FirstRegistration { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (New && (Mileage != null || FirstRegistration != null))
+            {
+                yield return new ValidationResult("Only used cars have Mileage and FirstRegistration", new[] { nameof(New), nameof(Mileage), nameof(FirstRegistration) });
+            }
+
+            FuelType fuelType;
+            if (!Enum.TryParse(Fuel, true, out fuelType))
+            {
+                yield return new ValidationResult("Fuel is not valid", new[] { nameof(Fuel) });
+            }
+        }
     }
 }

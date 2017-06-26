@@ -52,11 +52,9 @@ namespace Artemis.Web.Controllers
                 var carAdvert = repository.Get(vm.Id);
                 if (carAdvert == null)
                     return NotFound();
-                if (vm.MapTo(carAdvert))
-                {
-                    repository.Update(carAdvert);   
-                    return Ok(carAdvert.MapToVm());
-                }
+                vm.MapTo(carAdvert);
+                repository.Update(carAdvert);
+                return Ok(carAdvert.MapToVm());
             }
             return BadRequest();
         }
@@ -66,11 +64,9 @@ namespace Artemis.Web.Controllers
             if (ModelState.IsValid)
             {
                 var carAdvert = new CarAdvert();
-                if (vm.MapTo(carAdvert))
-                {
-                    repository.Create(carAdvert);
-                    return Ok(carAdvert.MapToVm());
-                }
+                vm.MapTo(carAdvert);
+                repository.Create(carAdvert);
+                return Ok(carAdvert.MapToVm());
             }
             return BadRequest();
         }

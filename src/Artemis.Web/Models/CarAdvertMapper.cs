@@ -8,27 +8,15 @@ namespace Artemis.Web.Models
 {
     public static class CarAdvertMapper
     {
-        public static bool MapTo(this CarAdvertViewModel vm, CarAdvert carAdvert)
+        public static void MapTo(this CarAdvertViewModel vm, CarAdvert carAdvert)
         {
-            if (vm.New && (vm.Mileage != null || vm.FirstRegistration != null))
-            {
-                return false;
-            }
-
-            FuelType fuelType;
-            if (!Enum.TryParse(vm.Fuel, true, out fuelType))
-            {
-                return false;
-            }
-
             carAdvert.Id = vm.Id;
             carAdvert.Title = vm.Title;
-            carAdvert.Fuel = fuelType;
+            carAdvert.Fuel = (FuelType) Enum.Parse(typeof(FuelType), vm.Fuel, true);
             carAdvert.Price = vm.Price;
             carAdvert.IsNew = vm.New;
             carAdvert.Mileage = vm.Mileage;
             carAdvert.FirstRegistration = vm.FirstRegistration;
-            return true;
         }
 
         public static CarAdvertViewModel MapToVm(this CarAdvert carAdvert)
