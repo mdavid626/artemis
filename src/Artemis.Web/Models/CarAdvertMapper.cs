@@ -15,19 +15,15 @@ namespace Artemis.Web.Models
                 return false;
             }
 
-            var fuelType = vm.Fuel?.ToLower();
-
-            if (fuelType != CarAdvertViewModel.FuelGasoline &&
-                fuelType != CarAdvertViewModel.FuelDiesel)
+            FuelType fuelType;
+            if (!Enum.TryParse(vm.Fuel, true, out fuelType))
             {
                 return false;
             }
 
             carAdvert.Id = vm.Id;
             carAdvert.Title = vm.Title;
-            carAdvert.Fuel = fuelType == CarAdvertViewModel.FuelGasoline
-                ? FuelType.Gasoline
-                : FuelType.Diesel;
+            carAdvert.Fuel = fuelType;
             carAdvert.Price = vm.Price;
             carAdvert.IsNew = vm.New;
             carAdvert.Mileage = vm.Mileage;
@@ -40,9 +36,7 @@ namespace Artemis.Web.Models
             var vm = new CarAdvertViewModel();
             vm.Id = carAdvert.Id;
             vm.Title = carAdvert.Title;
-            vm.Fuel = carAdvert.Fuel == FuelType.Gasoline
-                ? CarAdvertViewModel.FuelGasoline
-                : CarAdvertViewModel.FuelDiesel;
+            vm.Fuel = carAdvert.Fuel.ToString().ToLower();
             vm.Price = carAdvert.Price;
             vm.New = carAdvert.IsNew;
             vm.Mileage = carAdvert.Mileage;

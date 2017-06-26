@@ -8,9 +8,6 @@ namespace Artemis.Web.Models
 {
     public class CarAdvertViewModel
     {
-        public const string FuelGasoline = "gasoline";
-        public const string FuelDiesel = "diesel";
-
         public int Id { get; set; }
 
         [Required]
