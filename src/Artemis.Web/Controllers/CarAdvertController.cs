@@ -1,4 +1,4 @@
-﻿using Artemis.Web.Model;
+﻿using Artemis.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,17 +26,17 @@ namespace Artemis.Web.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Post(CarAdvert carAdvert)
+        public IHttpActionResult Post(CarAdvertViewModel carAdvert)
         {
             return Ok();
         }
 
-        public IHttpActionResult Put(CarAdvert carAdvert)
+        public IHttpActionResult Put(CarAdvertViewModel carAdvert)
         {
             return Ok();
         }
 
-        public IHttpActionResult Delete(CarAdvert carAdvert)
+        public IHttpActionResult Delete(CarAdvertViewModel carAdvert)
         {
             return Ok();
         }
