@@ -19,11 +19,11 @@ namespace Artemis.Web.Controllers
             this.repository = repository;
         }
 
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(string orderBy = null)
         {
             if (ModelState.IsValid)
             {
-                var carAdverts = repository.Get();
+                var carAdverts = repository.Get(orderBy);
                 var container = new CollectionResult<CarAdvertViewModel>()
                 {
                     Entities = carAdverts.Select(c => c.MapToVm())

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Dynamic;
+using System.Reflection;
 
 namespace Artemis.Data
 {
@@ -13,7 +15,7 @@ namespace Artemis.Data
 
         public CarAdvertRepository(ICarAdvertDbContextProvider dbContextProvider)
         {
-            this.dbContext = dbContextProvider.Provide(); ;
+            this.dbContext = dbContextProvider.Provide();
         }
 
         public CarAdvert Get(int id)
@@ -21,9 +23,10 @@ namespace Artemis.Data
             return dbContext.CarAdverts.FirstOrDefault(c => c.Id == id);
         }
 
-        public IEnumerable<CarAdvert> Get()
+        public IEnumerable<CarAdvert> Get(string orderBy = null)
         {
-            return dbContext.CarAdverts;
+            var ordering = GetOrdering(orderBy);
+            return dbContext.CarAdverts.OrderBy(ordering);
         }
 
         public void Update(CarAdvert carAdvert)
@@ -46,6 +49,22 @@ namespace Artemis.Data
         public void Dispose()
         {
             dbContext.Dispose();
+        }
+
+        private string GetOrdering(string orderBy)
+        {
+            var allowedProps = typeof(CarAdvert)
+                .GetProperties()
+                .Where(p => p.GetCustomAttribute<SortableAttribute>() != null)
+                .Select(p => p.Name.ToLower());
+
+            var prop = allowedProps.Intersect(new string[] { orderBy.ToLower() });
+            if (prop.Any())
+            {
+                return orderBy;
+            }
+
+            return nameof(CarAdvert.Id);
         }
     }
 }

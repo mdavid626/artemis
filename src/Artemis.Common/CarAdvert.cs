@@ -8,12 +8,15 @@ namespace Artemis.Common
 {
     public class CarAdvert
     {
+        [Sortable]
         public int Id { get; set; }
 
+        [Sortable]
         public string Title { get; set; }
 
         public FuelType Fuel { get; set; }
 
+        [Sortable]
         public decimal Price { get; set; }
 
         public bool IsNew { get; set; }
