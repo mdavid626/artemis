@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Artemis.Common
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class SortableAttribute : Attribute
+    public sealed class SortableAttribute : Attribute
     {
 
     }
