@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Artemis.Data
 {
-    internal interface ICarAdvertDbContextProvider
+    public interface ICarAdvertDbContextProvider
     {
         CarAdvertDbContext Provide();
     }

@@ -1,5 +1,6 @@
 ﻿using Artemis.Common;
 using Artemis.Data;
+using Atermis.Data;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace Artemis.Web
         private static void AddUnity(this HttpConfiguration config)
         {
             var container = new UnityContainer();
+            container.RegisterType<ICarAdvertDbContextProvider, CarAdvertDbContextProvider>(new HierarchicalLifetimeManager());
             container.RegisterType<ICarAdvertRepository, CarAdvertRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
         }

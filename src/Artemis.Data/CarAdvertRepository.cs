@@ -9,6 +9,13 @@ namespace Artemis.Data
 {
     public class CarAdvertRepository : ICarAdvertRepository
     {
+        private ICarAdvertDbContextProvider dbContextProvider;
+
+        public CarAdvertRepository(ICarAdvertDbContextProvider dbContextProvider)
+        {
+            this.dbContextProvider = dbContextProvider;
+        }
+
         public CarAdvert Get(int id)
         {
             return null;

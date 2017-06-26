@@ -21,27 +21,55 @@ namespace Artemis.Web.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var carAdverts = repository.Get();
+                return Ok(carAdverts);
+            }
+            return BadRequest();
         }
 
         public IHttpActionResult Get(int id)
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var carAdvert = repository.Get(id);
+                return Ok(carAdvert);
+            }
+            return BadRequest();
         }
 
-        public IHttpActionResult Post(CarAdvertViewModel carAdvert)
+        public IHttpActionResult Post(CarAdvertViewModel vm)
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var carAdvert = vm.Map();
+                repository.Update(carAdvert);
+                return Ok(carAdvert);
+            }
+            return BadRequest();
         }
 
-        public IHttpActionResult Put(CarAdvertViewModel carAdvert)
+        public IHttpActionResult Put(CarAdvertViewModel vm)
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var carAdvert = vm.Map();
+                repository.Create(carAdvert);
+                return Ok(carAdvert);
+            }
+            return BadRequest();
         }
 
-        public IHttpActionResult Delete(CarAdvertViewModel carAdvert)
+        public IHttpActionResult Delete(CarAdvertViewModel vm)
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var carAdvert = vm.Map();
+                repository.Delete(carAdvert);
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }
