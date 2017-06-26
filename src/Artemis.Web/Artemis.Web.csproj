@@ -117,6 +117,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarAdvertMapper.cs" />
     <Compile Include="Models\CarAdvertViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -124,6 +125,10 @@
     <ProjectReference Include="..\..\Artemis.Common\Artemis.Common.csproj">
       <Project>{61aa9996-0d1a-498b-95cc-2fdf9e52fd0d}</Project>
       <Name>Artemis.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Artemis.Data\Artemis.Data.csproj">
+      <Project>{326f065a-b8b0-4891-9ce9-0333f71bc2f4}</Project>
+      <Name>Artemis.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
