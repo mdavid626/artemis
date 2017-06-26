@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace Artemis.Data
 {
-    public class CarAdvertRepository : ICarAdvertRepository, IDisposable
+    public class CarAdvertRepository : IRepository<CarAdvert>, IDisposable
     {
         private CarAdvertDbContext dbContext;
 

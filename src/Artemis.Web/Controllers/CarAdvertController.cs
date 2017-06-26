@@ -13,10 +13,10 @@ namespace Artemis.Web.Controllers
     [EnableCors(origins: "*", headers: "*",  methods: "*")]
     public class CarAdvertController : ApiController
     {
-        private ICarAdvertRepository repository;
+        private IRepository<CarAdvert> repository;
         private IMapper mapper;
 
-        public CarAdvertController(ICarAdvertRepository repository, IMapper mapper)
+        public CarAdvertController(IRepository<CarAdvert> repository, IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;

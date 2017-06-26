@@ -14,7 +14,7 @@ namespace Artemis.Web.Tests
         [TestMethod]
         public void TestValidGet()
         {
-            var repository = Substitute.For<ICarAdvertRepository>();
+            var repository = Substitute.For<IRepository<CarAdvert>>();
             repository.Get().Returns(c => new CarAdvert[0]);
             var controller = new CarAdvertController(repository, AutoMapperConfig.Create());
 
@@ -31,7 +31,7 @@ namespace Artemis.Web.Tests
                 Id = 1,
                 Title = "Audi"
             };
-            var repository = Substitute.For<ICarAdvertRepository>();
+            var repository = Substitute.For<IRepository<CarAdvert>>();
             repository.Get(Arg.Any<int>()).Returns(c => carAdvert);
             var controller = new CarAdvertController(repository, AutoMapperConfig.Create());
 
