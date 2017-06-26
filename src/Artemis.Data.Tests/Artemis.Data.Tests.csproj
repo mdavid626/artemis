@@ -62,6 +62,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +72,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Artemis.Common\Artemis.Common.csproj">
+      <Project>{61aa9996-0d1a-498b-95cc-2fdf9e52fd0d}</Project>
+      <Name>Artemis.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Artemis.Data\Artemis.Data.csproj">
+      <Project>{326f065a-b8b0-4891-9ce9-0333f71bc2f4}</Project>
+      <Name>Artemis.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
