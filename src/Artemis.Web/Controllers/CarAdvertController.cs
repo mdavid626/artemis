@@ -26,7 +26,7 @@ namespace Artemis.Web.Controllers
                 var carAdverts = repository.Get();
                 var container = new
                 {
-                    Adverts = carAdverts
+                    Adverts = carAdverts.Select(c => c.MapToVm())
                 };
                 return Ok(container);
             }
@@ -40,18 +40,7 @@ namespace Artemis.Web.Controllers
                 var carAdvert = repository.Get(id);
                 if (carAdvert == null)
                     return NotFound();
-                return Ok(carAdvert);
-            }
-            return BadRequest();
-        }
-
-        public IHttpActionResult Post(CarAdvertViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                var carAdvert = vm.Map();
-                repository.Update(carAdvert);
-                return Ok(carAdvert);
+                return Ok(carAdvert.MapToVm());
             }
             return BadRequest();
         }
@@ -60,9 +49,24 @@ namespace Artemis.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var carAdvert = vm.Map();
+                var carAdvert = repository.Get(vm.Id);
+                if (carAdvert == null)
+                    return NotFound();
+                vm.MapTo(carAdvert);
+                repository.Update(carAdvert);
+                return Ok(carAdvert.MapToVm());
+            }
+            return BadRequest();
+        }
+
+        public IHttpActionResult Post(CarAdvertViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var carAdvert = new CarAdvert();
+                vm.MapTo(carAdvert);
                 repository.Create(carAdvert);
-                return Ok(carAdvert);
+                return Ok(carAdvert.MapToVm());
             }
             return BadRequest();
         }
@@ -71,7 +75,9 @@ namespace Artemis.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var carAdvert = vm.Map();
+                var carAdvert = repository.Get(vm.Id);
+                if (carAdvert == null)
+                    return NotFound();
                 repository.Delete(carAdvert);
                 return Ok();
             }

@@ -8,9 +8,8 @@ namespace Artemis.Web.Models
 {
     public static class CarAdvertMapper
     {
-        public static CarAdvert Map(this CarAdvertViewModel vm)
+        public static void MapTo(this CarAdvertViewModel vm, CarAdvert carAdvert)
         {
-            var carAdvert = new CarAdvert();
             carAdvert.Id = vm.Id;
             carAdvert.Title = vm.Title;
             carAdvert.Fuel = 0;
@@ -18,10 +17,9 @@ namespace Artemis.Web.Models
             carAdvert.IsNew = vm.New;
             carAdvert.Mileage = vm.Mileage;
             carAdvert.FirstRegistration = vm.FirstRegistration;
-            return carAdvert;
         }
 
-        public static CarAdvertViewModel Map(this CarAdvert carAdvert)
+        public static CarAdvertViewModel MapToVm(this CarAdvert carAdvert)
         {
             var vm = new CarAdvertViewModel();
             vm.Id = carAdvert.Id;
