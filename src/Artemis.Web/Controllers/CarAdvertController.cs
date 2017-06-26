@@ -24,7 +24,11 @@ namespace Artemis.Web.Controllers
             if (ModelState.IsValid)
             {
                 var carAdverts = repository.Get();
-                return Ok(carAdverts);
+                var container = new
+                {
+                    Adverts = carAdverts
+                };
+                return Ok(container);
             }
             return BadRequest();
         }
