@@ -14,7 +14,11 @@ namespace Artemis.Web
         {
             config.AddUnity();
 
-            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
         }
 
         private static void AddUnity(this HttpConfiguration config)
