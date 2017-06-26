@@ -1,6 +1,19 @@
 # Artemis
 
-### Requirements
+## Solution
+As my time was very limited (4 hours) I was not able to implement all features. For example sorting and full unit tests coverage is missing.
+
+Developer tools:
+- Visual Studio 2017
+- .NET 4.6
+- NuGet package manager
+- ASP.NET Web API 2
+- MSTest, NSubstitute, Effort
+- SQLite database
+
+Please edit the `connectionstring` in the `web.config`. You can use the sample database provided (`artemis.db`). Please make sure the web application has read/write access to the database file. For development purposes you can place the database file in your user folder. You can use the `create.sql` script from the `Artemis.Data` project to create the initial database structure.
+
+## Requirements
 
 Create a git repository (either local or public one on GitHub) that contains a RESTful web-service written in C#. The service should allow users to place new car adverts and view, modify and delete existing car adverts.
 
