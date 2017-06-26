@@ -9,7 +9,7 @@ namespace Artemis.Common
     public enum FuelType
     {
         Default = 0,
-        Gasoline = 1,
-        Diesel = 2
+        Diesel = 1,
+        Gasoline = 2
     }
 }
