@@ -4,7 +4,6 @@ using Artemis.Web.Controllers;
 using NSubstitute;
 using Artemis.Common;
 using System.Web.Http.Results;
-using Artemis.Web.Model;
 using Artemis.Web.Models;
 
 namespace Artemis.Web.Tests

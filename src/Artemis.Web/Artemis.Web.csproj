@@ -122,7 +122,7 @@
     </Compile>
     <Compile Include="Models\CarAdvertMapper.cs" />
     <Compile Include="Models\CarAdvertViewModel.cs" />
-    <Compile Include="Model\CarAdvertContainer.cs" />
+    <Compile Include="Models\CarAdvertContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

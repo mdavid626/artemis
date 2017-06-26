@@ -1,5 +1,4 @@
 ﻿using Artemis.Common;
-using Artemis.Web.Model;
 using Artemis.Web.Models;
 using System;
 using System.Collections.Generic;
