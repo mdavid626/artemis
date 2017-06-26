@@ -120,6 +120,12 @@
     <Compile Include="Models\CarAdvertViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Artemis.Common\Artemis.Common.csproj">
+      <Project>{61aa9996-0d1a-498b-95cc-2fdf9e52fd0d}</Project>
+      <Name>Artemis.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
