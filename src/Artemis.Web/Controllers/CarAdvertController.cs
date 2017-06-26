@@ -1,4 +1,5 @@
 ﻿using Artemis.Common;
+using Artemis.Web.Model;
 using Artemis.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,9 @@ namespace Artemis.Web.Controllers
             if (ModelState.IsValid)
             {
                 var carAdverts = repository.Get();
-                var container = new
+                var container = new CarAdvertContainer()
                 {
-                    Adverts = carAdverts.Select(c => c.MapToVm())
+                    CarAdverts = carAdverts.Select(c => c.MapToVm())
                 };
                 return Ok(container);
             }
