@@ -16,7 +16,7 @@ namespace Artemis.Web.Tests
         {
             var repository = Substitute.For<ICarAdvertRepository>();
             repository.Get().Returns(c => new CarAdvert[0]);
-            var controller = new CarAdvertController(repository);
+            var controller = new CarAdvertController(repository, AutoMapperConfig.Create());
 
             var result = controller.Get();
 
@@ -33,7 +33,7 @@ namespace Artemis.Web.Tests
             };
             var repository = Substitute.For<ICarAdvertRepository>();
             repository.Get(Arg.Any<int>()).Returns(c => carAdvert);
-            var controller = new CarAdvertController(repository);
+            var controller = new CarAdvertController(repository, AutoMapperConfig.Create());
 
             var result = controller.Get(1) as OkNegotiatedContentResult<CarAdvertViewModel>;
 

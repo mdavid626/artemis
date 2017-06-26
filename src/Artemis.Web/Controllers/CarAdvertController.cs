@@ -1,5 +1,6 @@
 ﻿using Artemis.Common;
 using Artemis.Web.Models;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace Artemis.Web.Controllers
     public class CarAdvertController : ApiController
     {
         private ICarAdvertRepository repository;
+        private IMapper mapper;
 
-        public CarAdvertController(ICarAdvertRepository repository)
+        public CarAdvertController(ICarAdvertRepository repository, IMapper mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
         public IHttpActionResult Get(string orderBy = null, string direction = null)
@@ -26,7 +29,7 @@ namespace Artemis.Web.Controllers
                 var carAdverts = repository.Get(orderBy, direction);
                 var container = new CollectionResult<CarAdvertViewModel>()
                 {
-                    Entities = carAdverts.Select(c => c.MapToVm())
+                    Entities = carAdverts.Select(c => mapper.Map<CarAdvertViewModel>(c))
                 };
                 return Ok(container);
             }
@@ -40,7 +43,7 @@ namespace Artemis.Web.Controllers
                 var carAdvert = repository.Get(id);
                 if (carAdvert == null)
                     return NotFound();
-                return Ok(carAdvert.MapToVm());
+                return Ok(mapper.Map<CarAdvertViewModel>(carAdvert));
             }
             return BadRequest();
         }
@@ -52,9 +55,9 @@ namespace Artemis.Web.Controllers
                 var carAdvert = repository.Get(vm.Id);
                 if (carAdvert == null)
                     return NotFound();
-                vm.MapTo(carAdvert);
+                mapper.Map(vm, carAdvert);
                 repository.Update(carAdvert);
-                return Ok(carAdvert.MapToVm());
+                return Ok(mapper.Map<CarAdvertViewModel>(carAdvert));
             }
             return BadRequest();
         }
@@ -63,10 +66,9 @@ namespace Artemis.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var carAdvert = new CarAdvert();
-                vm.MapTo(carAdvert);
+                var carAdvert = mapper.Map<CarAdvert>(vm);
                 repository.Create(carAdvert);
-                return Ok(carAdvert.MapToVm());
+                return Ok(mapper.Map<CarAdvertViewModel>(carAdvert));
             }
             return BadRequest();
         }

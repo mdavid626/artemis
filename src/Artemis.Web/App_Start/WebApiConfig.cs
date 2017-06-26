@@ -31,6 +31,7 @@ namespace Artemis.Web
             var container = new UnityContainer();
             container.RegisterType<ICarAdvertDbContextProvider, CarAdvertDbContextProvider>(new HierarchicalLifetimeManager());
             container.RegisterType<ICarAdvertRepository, CarAdvertRepository>(new HierarchicalLifetimeManager());
+            container.RegisterInstance(AutoMapperConfig.Create());
             config.DependencyResolver = new UnityResolver(container);
         }
     }
