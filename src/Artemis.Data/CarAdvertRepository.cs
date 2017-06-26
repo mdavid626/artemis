@@ -72,7 +72,7 @@ namespace Artemis.Data
                 return orderBy + directionText;
             }
 
-            return nameof(CarAdvert.Id);
+            return nameof(CarAdvert.Id) + directionText;
         }
     }
 }
