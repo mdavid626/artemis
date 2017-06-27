@@ -57,7 +57,7 @@ namespace Artemis.Data
                 ? " asc"
                 : " desc";
 
-            var allowedProps = typeof(CarAdvert)
+            var allowedProps = typeof(T)
                 .GetProperties()
                 .Where(p => p.GetCustomAttribute<SortableAttribute>() != null)
                 .Select(p => p.Name.ToLower());
