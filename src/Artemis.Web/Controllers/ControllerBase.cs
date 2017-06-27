@@ -9,8 +9,8 @@ using System.Web.Http;
 
 namespace Artemis.Web.Controllers
 {
-    public abstract class ControllerBase<TModel, TViewModel> : ApiController
-        where TViewModel : class, IHasKey
+    public abstract class ControllerBase<TModel, TModelDto> : ApiController
+        where TModelDto : class, IHasKey
     {
         private IRepository<TModel> repository;
         private IUnitOfWork unitOfWork;
@@ -29,9 +29,9 @@ namespace Artemis.Web.Controllers
             {
                 var queryContext = CreateQueryContext(orderBy, direction);
                 var entities = repository.Get(queryContext);
-                var container = new CollectionResult<TViewModel>()
+                var container = new CollectionResultDto<TModelDto>()
                 {
-                    Entities = entities.Select(c => mapper.Map<TViewModel>(c))
+                    Entities = entities.Select(c => mapper.Map<TModelDto>(c))
                 };
                 return Ok(container);
             }
@@ -45,12 +45,12 @@ namespace Artemis.Web.Controllers
                 var entity = repository.Get(id);
                 if (entity == null)
                     return NotFound();
-                return Ok(mapper.Map<TViewModel>(entity));
+                return Ok(mapper.Map<TModelDto>(entity));
             }
             return BadRequest();
         }
 
-        public IHttpActionResult Put(TViewModel vm)
+        public IHttpActionResult Put(TModelDto vm)
         {
             if (ModelState.IsValid)
             {
@@ -60,24 +60,24 @@ namespace Artemis.Web.Controllers
                 mapper.Map(vm, entity);
                 repository.Update(entity);
                 unitOfWork.Commit();
-                return Ok(mapper.Map<TViewModel>(entity));
+                return Ok(mapper.Map<TModelDto>(entity));
             }
             return BadRequest();
         }
 
-        public IHttpActionResult Post(TViewModel vm)
+        public IHttpActionResult Post(TModelDto vm)
         {
             if (ModelState.IsValid)
             {
                 var entity = mapper.Map<TModel>(vm);
                 repository.Create(entity);
                 unitOfWork.Commit();
-                return Ok(mapper.Map<TViewModel>(entity));
+                return Ok(mapper.Map<TModelDto>(entity));
             }
             return BadRequest();
         }
 
-        public IHttpActionResult Delete(TViewModel vm)
+        public IHttpActionResult Delete(TModelDto vm)
         {
             if (ModelState.IsValid)
             {

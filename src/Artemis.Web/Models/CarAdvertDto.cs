@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Artemis.Web.Models
 {
-    public class CarAdvertViewModel : IValidatableObject, IHasKey
+    public class CarAdvertDto : IValidatableObject, IHasKey
     {
         public int Id { get; set; }
 

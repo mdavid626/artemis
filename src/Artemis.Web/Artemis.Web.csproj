@@ -126,8 +126,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarAdvertViewModel.cs" />
-    <Compile Include="Models\CollectionResult.cs" />
+    <Compile Include="Models\CarAdvertDto.cs" />
+    <Compile Include="Models\CollectionResultDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

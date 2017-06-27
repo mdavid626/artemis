@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Artemis.Web.Models
 {
-    public class CollectionResult<T> where T : class
+    public class CollectionResultDto<T> where T : class
     {
         public IEnumerable<T> Entities { get; set; }
     }

@@ -27,7 +27,7 @@ namespace Artemis.Web.Tests
 
             var result = controller.Get();
 
-            Assert.IsTrue(result is OkNegotiatedContentResult<CollectionResult<CarAdvertViewModel>>);
+            Assert.IsTrue(result is OkNegotiatedContentResult<CollectionResultDto<CarAdvertDto>>);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Artemis.Web.Tests
             var unitOfWork = Substitute.For<IUnitOfWork>();
             var controller = new CarAdvertController(repository, unitOfWork, CreateMappings());
 
-            var result = controller.Get(1) as OkNegotiatedContentResult<CarAdvertViewModel>;
+            var result = controller.Get(1) as OkNegotiatedContentResult<CarAdvertDto>;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(result.Content.Id, carAdvert.Id);

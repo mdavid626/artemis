@@ -21,7 +21,7 @@ namespace Artemis.Web.Tests
         [TestMethod]
         public void TestValidMapping()
         {
-            var vm = new CarAdvertViewModel();
+            var vm = new CarAdvertDto();
             vm.Id = 1;
             vm.Title = "Audi";
             vm.Price = 5000;
@@ -36,7 +36,7 @@ namespace Artemis.Web.Tests
         [TestMethod]
         public void TestMissingFuel()
         {
-            var vm = new CarAdvertViewModel();
+            var vm = new CarAdvertDto();
             vm.Id = 1;
             vm.Title = "Audi";
             vm.Price = 5000;
@@ -50,7 +50,7 @@ namespace Artemis.Web.Tests
         [TestMethod]
         public void TestInvalidFuel()
         {
-            var vm = new CarAdvertViewModel();
+            var vm = new CarAdvertDto();
             vm.Id = 1;
             vm.Title = "Audi";
             vm.Price = 5000;
@@ -65,7 +65,7 @@ namespace Artemis.Web.Tests
         [TestMethod]
         public void TestUsedCar()
         {
-            var vm = new CarAdvertViewModel();
+            var vm = new CarAdvertDto();
             vm.Id = 1;
             vm.Title = "Audi";
             vm.Price = 5000;
@@ -82,7 +82,7 @@ namespace Artemis.Web.Tests
         [TestMethod]
         public void TestInvalidUsedCar()
         {
-            var vm = new CarAdvertViewModel();
+            var vm = new CarAdvertDto();
             vm.Id = 1;
             vm.Title = "Audi";
             vm.Price = 5000;
