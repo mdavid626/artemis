@@ -9,7 +9,7 @@ using System.Linq;
 namespace Artemis.Web.Tests
 {
     [TestClass]
-    public class CarAdvertViewModelTest
+    public class CarAdvertDtoTest
     {
         private ICollection<ValidationResult> Validate(object obj)
         {

@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarAdvertControllerTest.cs" />
-    <Compile Include="CarAdvertViewModelTest.cs" />
+    <Compile Include="CarAdvertDtoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
