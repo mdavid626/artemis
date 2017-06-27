@@ -1,6 +1,5 @@
 ﻿using Artemis.Common;
 using Artemis.Data;
-using Atermis.Data;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace Artemis.Web
     {
         public static void Register(HttpConfiguration config)
         {
-            config.AddUnity();
+            config.EnableUnity();
 
             config.EnableCors();
 
@@ -24,15 +23,6 @@ namespace Artemis.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-        }
-
-        private static void AddUnity(this HttpConfiguration config)
-        {
-            var container = new UnityContainer();
-            container.RegisterType<ICarAdvertDbContextProvider, CarAdvertDbContextProvider>(new HierarchicalLifetimeManager());
-            container.RegisterType<IRepository<CarAdvert>, CarAdvertRepository>(new HierarchicalLifetimeManager());
-            container.RegisterInstance(AutoMapperConfig.Create());
-            config.DependencyResolver = new UnityResolver(container);
         }
     }
 }

@@ -6,73 +6,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Dynamic;
 using System.Reflection;
+using System.Data.Entity;
 
 namespace Artemis.Data
 {
-    public class CarAdvertRepository : IRepository<CarAdvert>, IDisposable
+    public class CarAdvertRepository : DbContextRepository<CarAdvert>
     {
-        private CarAdvertDbContext dbContext;
+        private IUnitOfWork unitOfWork;
 
-        public CarAdvertRepository(ICarAdvertDbContextProvider dbContextProvider)
+        private DbSet<CarAdvert> entityDbSet;
+
+        public override DbSet<CarAdvert> EntityDbSet
         {
-            this.dbContext = dbContextProvider.Provide();
-        }
-
-        public CarAdvert Get(int id)
-        {
-            return dbContext.CarAdverts.FirstOrDefault(c => c.Id == id);
-        }
-
-        public IEnumerable<CarAdvert> Get(string orderBy = null, string direction = null)
-        {
-            var ordering = GetOrdering(orderBy, direction);
-            return dbContext.CarAdverts.OrderBy(ordering);
-        }
-
-        public void Update(CarAdvert carAdvert)
-        {
-            dbContext.SaveChanges();
-        }
-
-        public void Create(CarAdvert carAdvert)
-        {
-            dbContext.CarAdverts.Add(carAdvert);
-            dbContext.SaveChanges();
-        }
-
-        public void Delete(CarAdvert carAdvert)
-        {
-            dbContext.CarAdverts.Remove(carAdvert);
-            dbContext.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            dbContext.Dispose();
-        }
-
-        private string GetOrdering(string orderBy, string direction)
-        {
-            var ascending = true;
-            if (direction?.ToLower() == "desc")
-                ascending = false;
-
-            var directionText = ascending
-                ? " asc"
-                : " desc";
-
-            var allowedProps = typeof(CarAdvert)
-                .GetProperties()
-                .Where(p => p.GetCustomAttribute<SortableAttribute>() != null)
-                .Select(p => p.Name.ToLower());
-
-            var prop = allowedProps.Intersect(new string[] { orderBy?.ToLower() });
-            if (prop.Any())
+            get
             {
-                return orderBy + directionText;
+                if (entityDbSet == null)
+                    entityDbSet = unitOfWork.ProvideContext<CarAdvertDbContext>().CarAdverts;
+                return entityDbSet;
             }
+        }
 
-            return nameof(CarAdvert.Id) + directionText;
+        public CarAdvertRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
         }
     }
 }

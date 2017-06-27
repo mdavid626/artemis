@@ -13,11 +13,13 @@ namespace Artemis.Web.Controllers
         where TViewModel : class, IHasKey
     {
         private IRepository<TModel> repository;
+        private IUnitOfWork unitOfWork;
         private IMapper mapper;
 
-        public ControllerBase(IRepository<TModel> repository, IMapper mapper)
+        public ControllerBase(IRepository<TModel> repository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.repository = repository;
+            this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
 
@@ -56,6 +58,7 @@ namespace Artemis.Web.Controllers
                     return NotFound();
                 mapper.Map(vm, entity);
                 repository.Update(entity);
+                unitOfWork.Commit();
                 return Ok(mapper.Map<TViewModel>(entity));
             }
             return BadRequest();
@@ -67,6 +70,7 @@ namespace Artemis.Web.Controllers
             {
                 var entity = mapper.Map<TModel>(vm);
                 repository.Create(entity);
+                unitOfWork.Commit();
                 return Ok(mapper.Map<TViewModel>(entity));
             }
             return BadRequest();
@@ -80,6 +84,7 @@ namespace Artemis.Web.Controllers
                 if (entity == null)
                     return NotFound();
                 repository.Delete(entity);
+                unitOfWork.Commit();
                 return Ok();
             }
             return BadRequest();

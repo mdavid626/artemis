@@ -13,8 +13,8 @@ namespace Artemis.Web.Controllers
     [EnableCors(origins: "*", headers: "*",  methods: "*")]
     public class CarAdvertController : ControllerBase<CarAdvert, CarAdvertViewModel>
     {
-        public CarAdvertController(IRepository<CarAdvert> repository, IMapper mapper)
-            : base(repository, mapper)
+        public CarAdvertController(IRepository<CarAdvert> repository, IUnitOfWork unitOfWork, IMapper mapper)
+            : base(repository, unitOfWork, mapper)
         {
             
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Artemis.Common
 {
-    public class CarAdvert
+    public class CarAdvert : IHasKey
     {
         [Sortable]
         public int Id { get; set; }

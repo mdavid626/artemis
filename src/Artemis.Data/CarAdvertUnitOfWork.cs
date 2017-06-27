@@ -1,15 +1,15 @@
-﻿using Artemis.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Atermis.Data
+namespace Artemis.Data
 {
-    public class CarAdvertDbContextProvider : ICarAdvertDbContextProvider
+    public class CarAdvertUnitOfWork : DbContextUnitOfWork
     {
-        public CarAdvertDbContext Provide()
+        protected override DbContext Create()
         {
             return new CarAdvertDbContext();
         }

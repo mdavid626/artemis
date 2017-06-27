@@ -23,9 +23,9 @@ namespace Artemis.Data.Tests
                 dbContext.CarAdverts.Add(carAdvert);
                 dbContext.SaveChanges();
 
-                var dbContextProvider = Substitute.For<ICarAdvertDbContextProvider>();
-                dbContextProvider.Provide().Returns(p => dbContext);
-                var repository = new CarAdvertRepository(dbContextProvider);
+                var unitOfWork = Substitute.For<IUnitOfWork>();
+                unitOfWork.ProvideContext<CarAdvertDbContext>().Returns(p => dbContext);
+                var repository = new CarAdvertRepository(unitOfWork);
 
                 // act
                 var items = repository.Get().ToList();
@@ -50,9 +50,9 @@ namespace Artemis.Data.Tests
                 dbContext.CarAdverts.Add(carAdvert);
                 dbContext.SaveChanges();
 
-                var dbContextProvider = Substitute.For<ICarAdvertDbContextProvider>();
-                dbContextProvider.Provide().Returns(p => dbContext);
-                var repository = new CarAdvertRepository(dbContextProvider);
+                var unitOfWork = Substitute.For<IUnitOfWork>();
+                unitOfWork.ProvideContext<CarAdvertDbContext>().Returns(p => dbContext);
+                var repository = new CarAdvertRepository(unitOfWork);
 
                 // act
                 var item = repository.Get(carAdvert.Id);

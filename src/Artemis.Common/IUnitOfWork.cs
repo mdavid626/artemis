@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Artemis.Data
+namespace Artemis.Common
 {
-    public interface ICarAdvertDbContextProvider
+    public interface IUnitOfWork
     {
-        CarAdvertDbContext Provide();
+        T ProvideContext<T>() where T : class;
+
+        void Commit();
     }
 }

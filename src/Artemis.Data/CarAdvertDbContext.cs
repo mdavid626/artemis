@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Artemis.Data
 {
-    public class CarAdvertDbContext : DbContext
+    internal class CarAdvertDbContext : DbContext
     {
         public CarAdvertDbContext() : base("SqlConnectionString")
         {
