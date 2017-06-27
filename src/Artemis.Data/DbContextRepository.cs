@@ -26,9 +26,10 @@ namespace Artemis.Data
             return EntityDbSet.FirstOrDefault(c => c.Id == id);
         }
 
-        public IEnumerable<T> Get(string orderBy = null, string direction = null)
+        public IEnumerable<T> Get(QueryContext context = null)
         {
-            var ordering = GetOrdering(orderBy, direction);
+            var ensuredContext = EnsureQueryContext(context);
+            var ordering = GetOrdering(ensuredContext);
             return EntityDbSet.OrderBy(ordering);
         }
 
@@ -47,25 +48,30 @@ namespace Artemis.Data
             EntityDbSet.Remove(entity);
         }
 
-        private string GetOrdering(string orderBy, string direction)
+        private QueryContext EnsureQueryContext(QueryContext context)
         {
-            var ascending = true;
-            if (direction?.ToLower() == "desc")
-                ascending = false;
+            if (context == null)
+            {
+                return new QueryContext();
+            }
+            return context;
+        }
 
-            var directionText = ascending
-                ? " asc"
-                : " desc";
+        private string GetOrdering(QueryContext context)
+        {
+            var directionText = context.SortDescending
+                ? " desc"
+                : " asc";
 
             var allowedProps = typeof(T)
                 .GetProperties()
                 .Where(p => p.GetCustomAttribute<SortableAttribute>() != null)
                 .Select(p => p.Name.ToLower());
 
-            var prop = allowedProps.Intersect(new string[] { orderBy?.ToLower() });
+            var prop = allowedProps.Intersect(new string[] { context.SortBy?.ToLower() });
             if (prop.Any())
             {
-                return orderBy + directionText;
+                return context.SortBy + directionText;
             }
 
             return nameof(IHasKey.Id) + directionText;

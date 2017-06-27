@@ -27,7 +27,8 @@ namespace Artemis.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var entities = repository.Get(orderBy, direction);
+                var queryContext = CreateQueryContext(orderBy, direction);
+                var entities = repository.Get(queryContext);
                 var container = new CollectionResult<TViewModel>()
                 {
                     Entities = entities.Select(c => mapper.Map<TViewModel>(c))
@@ -88,6 +89,14 @@ namespace Artemis.Web.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+
+        public QueryContext CreateQueryContext(string orderBy, string direction)
+        {
+            var context = new QueryContext();
+            context.SortBy = orderBy; // TODO: map to the internal name
+            context.SortDescending = direction?.ToLower() == "desc";
+            return context;
         }
     }
 }
