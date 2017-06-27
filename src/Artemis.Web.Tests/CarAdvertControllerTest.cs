@@ -7,6 +7,7 @@ using System.Web.Http.Results;
 using Artemis.Web.Models;
 using AutoMapper;
 using Artemis.Web.ViewModels;
+using System.Linq;
 
 namespace Artemis.Web.Tests
 {
@@ -21,14 +22,29 @@ namespace Artemis.Web.Tests
         [TestMethod]
         public void TestValidGet()
         {
+            var carAdvert = new CarAdvert()
+            {
+                Id = 1,
+                Title = "Audi",
+                Price = 1500,
+                Fuel = FuelType.Diesel,
+                IsNew = true
+            };
             var vm = Substitute.For<IViewModel<CarAdvert>>();
-            vm.Get(Arg.Any<QueryContext>()).Returns(c => new CarAdvert[0]);
+            vm.Get(Arg.Any<QueryContext>()).Returns(c => new CarAdvert[] { carAdvert });
 
             var controller = new CarAdvertController(vm, CreateMappings());
 
-            var result = controller.Get();
+            var result = controller.Get() as OkNegotiatedContentResult<CollectionResultDto<CarAdvertDto>>;
 
-            Assert.IsTrue(result is OkNegotiatedContentResult<CollectionResultDto<CarAdvertDto>>);
+            Assert.IsNotNull(result);
+
+            var item = result.Content.Entities.Single();
+            Assert.AreEqual(item.Id, 1);
+            Assert.AreEqual(item.Title, "Audi");
+            Assert.AreEqual(item.Price, 1500);
+            Assert.AreEqual(item.Fuel, "diesel");
+            Assert.AreEqual(item.New, true);
         }
 
         [TestMethod]
@@ -37,7 +53,10 @@ namespace Artemis.Web.Tests
             var carAdvert = new CarAdvert()
             {
                 Id = 1,
-                Title = "Audi"
+                Title = "Audi",
+                Price = 1500,
+                Fuel = FuelType.Diesel,
+                IsNew = true
             };
             var vm = Substitute.For<IViewModel<CarAdvert>>();
             vm.Get(Arg.Any<int>()).Returns(c => carAdvert);
@@ -46,8 +65,13 @@ namespace Artemis.Web.Tests
             var result = controller.Get(1) as OkNegotiatedContentResult<CarAdvertDto>;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Content.Id, carAdvert.Id);
-            Assert.AreEqual(result.Content.Title, carAdvert.Title);
+
+            var item = result.Content;
+            Assert.AreEqual(item.Id, 1);
+            Assert.AreEqual(item.Title, "Audi");
+            Assert.AreEqual(item.Price, 1500);
+            Assert.AreEqual(item.Fuel, "diesel");
+            Assert.AreEqual(item.New, true);
         }
     }
 }
