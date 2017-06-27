@@ -2,12 +2,22 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Artemis.Common;
 using Artemis.Web.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Artemis.Web.Tests
 {
     [TestClass]
-    public class CarAdvertMapperTest
+    public class CarAdvertViewModelTest
     {
+        private ICollection<ValidationResult> Validate(object obj)
+        {
+            var errors = new List<ValidationResult>();
+            Validator.TryValidateObject(obj, new ValidationContext(obj), errors);
+            return errors;
+        }
+
         [TestMethod]
         public void TestValidMapping()
         {
@@ -17,9 +27,10 @@ namespace Artemis.Web.Tests
             vm.Price = 5000;
             vm.Fuel = "gasoline";
             vm.New = true;
-            var carAdvert = new CarAdvert();
-            //var result = vm.MapTo(carAdvert);
-            //Assert.IsTrue(result);
+
+            var errors = Validate(vm);
+
+            Assert.IsFalse(errors.Any());
         }
 
         [TestMethod]
@@ -30,9 +41,10 @@ namespace Artemis.Web.Tests
             vm.Title = "Audi";
             vm.Price = 5000;
             vm.New = true;
-            var carAdvert = new CarAdvert();
-            //var result = vm.MapTo(carAdvert);
-            //Assert.IsFalse(result);
+
+            var errors = Validate(vm);
+
+            Assert.IsTrue(errors.Any());
         }
 
         [TestMethod]
@@ -44,9 +56,10 @@ namespace Artemis.Web.Tests
             vm.Price = 5000;
             vm.Fuel = "adsfdasf";
             vm.New = true;
-            var carAdvert = new CarAdvert();
-            //var result = vm.MapTo(carAdvert);
-            //Assert.IsFalse(result);
+
+            var errors = Validate(vm);
+
+            Assert.IsTrue(errors.Any());
         }
 
         [TestMethod]
@@ -60,9 +73,10 @@ namespace Artemis.Web.Tests
             vm.New = false;
             vm.Mileage = 5000;
             vm.FirstRegistration = DateTime.Now;
-            var carAdvert = new CarAdvert();
-            //var result = vm.MapTo(carAdvert);
-            //Assert.IsTrue(result);
+
+            var errors = Validate(vm);
+
+            Assert.IsFalse(errors.Any());
         }
 
         [TestMethod]
@@ -76,9 +90,10 @@ namespace Artemis.Web.Tests
             vm.New = true;
             vm.Mileage = 5000;
             vm.FirstRegistration = DateTime.Now;
-            var carAdvert = new CarAdvert();
-            //var result = vm.MapTo(carAdvert);
-            //Assert.IsFalse(result);
+
+            var errors = Validate(vm);
+
+            Assert.IsTrue(errors.Any());
         }
     }
 }
