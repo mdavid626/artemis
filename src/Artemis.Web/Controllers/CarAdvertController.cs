@@ -1,5 +1,6 @@
 ﻿using Artemis.Common;
 using Artemis.Web.Models;
+using Artemis.Web.ViewModels;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace Artemis.Web.Controllers
     [EnableCors(origins: "*", headers: "*",  methods: "*")]
     public class CarAdvertController : ControllerBase<CarAdvert, CarAdvertDto>
     {
-        public CarAdvertController(IRepository<CarAdvert> repository, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(repository, unitOfWork, mapper)
+        public CarAdvertController(IViewModel<CarAdvert> vm, IMapper mapper)
+            : base(vm, mapper)
         {
             
         }

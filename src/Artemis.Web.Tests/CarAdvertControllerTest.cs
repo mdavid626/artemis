@@ -6,6 +6,7 @@ using Artemis.Common;
 using System.Web.Http.Results;
 using Artemis.Web.Models;
 using AutoMapper;
+using Artemis.Web.ViewModels;
 
 namespace Artemis.Web.Tests
 {
@@ -20,10 +21,10 @@ namespace Artemis.Web.Tests
         [TestMethod]
         public void TestValidGet()
         {
-            var repository = Substitute.For<IRepository<CarAdvert>>();
-            repository.Get().Returns(c => new CarAdvert[0]);
-            var unitOfWork = Substitute.For<IUnitOfWork>();
-            var controller = new CarAdvertController(repository, unitOfWork, CreateMappings());
+            var vm = Substitute.For<IViewModel<CarAdvert>>();
+            vm.Get(Arg.Any<QueryContext>()).Returns(c => new CarAdvert[0]);
+
+            var controller = new CarAdvertController(vm, CreateMappings());
 
             var result = controller.Get();
 
@@ -38,10 +39,9 @@ namespace Artemis.Web.Tests
                 Id = 1,
                 Title = "Audi"
             };
-            var repository = Substitute.For<IRepository<CarAdvert>>();
-            repository.Get(Arg.Any<int>()).Returns(c => carAdvert);
-            var unitOfWork = Substitute.For<IUnitOfWork>();
-            var controller = new CarAdvertController(repository, unitOfWork, CreateMappings());
+            var vm = Substitute.For<IViewModel<CarAdvert>>();
+            vm.Get(Arg.Any<int>()).Returns(c => carAdvert);
+            var controller = new CarAdvertController(vm, CreateMappings());
 
             var result = controller.Get(1) as OkNegotiatedContentResult<CarAdvertDto>;
 

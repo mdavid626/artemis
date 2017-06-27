@@ -1,5 +1,6 @@
 ﻿using Artemis.Common;
 using Artemis.Data;
+using Artemis.Web.ViewModels;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Artemis.Web
         {
             container.RegisterType<IUnitOfWork, CarAdvertUnitOfWork>(new HierarchicalLifetimeManager());
             container.RegisterType<IRepository<CarAdvert>, CarAdvertRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IViewModel<CarAdvert>, CarAdvertViewModel>(new HierarchicalLifetimeManager());
             container.RegisterInstance(AutoMapperConfig.Create());
         }
     }
