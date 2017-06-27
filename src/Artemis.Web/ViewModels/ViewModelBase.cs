@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Linq.Dynamic;
+using System.Reflection;
 
 namespace Artemis.Web.ViewModels
 {
@@ -19,7 +21,9 @@ namespace Artemis.Web.ViewModels
 
         public IEnumerable<T> Get(QueryContext queryContext)
         {
-            return repository.Get(queryContext);
+            var ensuredContext = EnsureQueryContext(queryContext);
+            var ordering = GetOrdering(ensuredContext);
+            return repository.Get().OrderBy(ordering);
         }
 
         public T Get(int id)
@@ -43,6 +47,35 @@ namespace Artemis.Web.ViewModels
         {
             repository.Delete(entity);
             unitOfWork.Commit();
+        }
+
+        private QueryContext EnsureQueryContext(QueryContext context)
+        {
+            if (context == null)
+            {
+                return new QueryContext();
+            }
+            return context;
+        }
+
+        private string GetOrdering(QueryContext context)
+        {
+            var directionText = context.SortDescending
+                ? " desc"
+                : " asc";
+
+            var allowedProps = typeof(T)
+                .GetProperties()
+                .Where(p => p.GetCustomAttribute<SortableAttribute>() != null)
+                .Select(p => p.Name.ToLower());
+
+            var prop = allowedProps.Intersect(new string[] { context.SortBy?.ToLower() });
+            if (prop.Any())
+            {
+                return context.SortBy + directionText;
+            }
+
+            return nameof(IHasKey.Id) + directionText;
         }
     }
 }

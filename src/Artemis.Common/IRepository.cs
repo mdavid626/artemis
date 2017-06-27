@@ -11,7 +11,7 @@ namespace Artemis.Common
     {
         T Get(int id);
 
-        IEnumerable<T> Get(QueryContext context = null);
+        IQueryable<T> Get();
 
         void Update(T carAdvert);
 
