@@ -21,7 +21,8 @@ namespace Artemis.Web
 
         private static void RegisterTypes(this UnityContainer container)
         {
-            container.RegisterType<IUnitOfWork, CarAdvertUnitOfWork>(new HierarchicalLifetimeManager());
+            container.RegisterType<IDbContextProvider, CarAdvertDbContextProvider>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUnitOfWork, DbContextUnitOfWork>(new HierarchicalLifetimeManager());
             container.RegisterType<IRepository<CarAdvert>, CarAdvertRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IViewModel<CarAdvert>, CarAdvertViewModel>(new HierarchicalLifetimeManager());
             container.RegisterInstance(AutoMapperConfig.Create());

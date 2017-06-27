@@ -59,9 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarAdvertDbContext.cs" />
+    <Compile Include="CarAdvertDbContextProvider.cs" />
     <Compile Include="CarAdvertRepository.cs" />
-    <Compile Include="CarAdvertUnitOfWork.cs" />
     <Compile Include="DbContextRepository.cs" />
+    <Compile Include="IDbContextProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DbContextUnitOfWork.cs" />
   </ItemGroup>

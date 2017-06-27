@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Artemis.Data
 {
-    public class CarAdvertUnitOfWork : DbContextUnitOfWork
+    public interface IDbContextProvider
     {
-        protected override DbContext Create()
-        {
-            return new CarAdvertDbContext();
-        }
+        DbContext Provide();
     }
 }

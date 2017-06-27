@@ -8,11 +8,20 @@ using System.Threading.Tasks;
 
 namespace Artemis.Data
 {
-    public abstract class DbContextUnitOfWork : IUnitOfWork, IDisposable
+    public class DbContextUnitOfWork : IUnitOfWork, IDisposable
     {
         private DbContext dbContext;
+        private IDbContextProvider dbContextProvider;
 
-        protected abstract DbContext Create();
+        public DbContextUnitOfWork(IDbContextProvider dbContextProvider)
+        {
+            this.dbContextProvider = dbContextProvider;
+        }
+
+        private DbContext Create()
+        {
+            return dbContextProvider.Provide();
+        }
 
         public void Commit()
         {
