@@ -66,7 +66,7 @@ namespace Artemis.Web.ViewModels
 
             var allowedProps = typeof(T)
                 .GetProperties()
-                .Where(p => p.GetCustomAttribute<SortableAttribute>() != null)
+                .Where(p => Attribute.IsDefined(p, typeof(SortableAttribute)))
                 .Select(p => p.Name.ToLower());
 
             var prop = allowedProps.Intersect(new string[] { context.SortBy?.ToLower() });
